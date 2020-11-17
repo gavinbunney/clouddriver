@@ -99,13 +99,21 @@ subprojects {
       dependsOn test
     }
 
-    repositories {
-      maven {
-        name = "GitHubPackages"
-        url = "https://maven.pkg.github.com/gavinbunney/clouddriver"
-        credentials {
-          username = System.getenv("GITHUB_ACTOR")
-          password = System.getenv("GITHUB_TOKEN")
+    publishing {
+      publications {
+        maven(MavenPublication) {
+          from components.java
+        }
+      }
+
+      repositories {
+        maven {
+          name = "GitHubPackages"
+          url = "https://maven.pkg.github.com/gavinbunney/clouddriver"
+          credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+          }
         }
       }
     }

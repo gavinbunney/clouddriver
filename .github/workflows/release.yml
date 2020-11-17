@@ -23,6 +23,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Publish package
-        run: ./gradlew --info publish
+        run: ./gradlew --info publishToMavenLocal -Pversion="${GITHUB_REF}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

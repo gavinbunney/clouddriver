@@ -109,6 +109,14 @@ subprojects {
             password = System.getenv("GITHUB_TOKEN")
           }
         }
+        maven {
+          name = "bintray"
+          url = "https://dl.bintray.com/gavinbunney/clouddriver"
+          credentials {
+            username = System.getenv("BINTRAY_USER")
+            password = System.getenv("BINTRAY_API_KEY")
+          }
+        }
       }
     }
   }

@@ -22,7 +22,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Publish package
-        run: ./gradlew --info publishToMavenLocal -Pversion="${GITHUB_REF}"
+        run: ./gradlew --info publish -Pversion="${{ steps.get_version.outputs.VERSION }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

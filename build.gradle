@@ -101,20 +101,23 @@ subprojects {
 
     publishing {
       repositories {
-        maven {
-          name = "GitHubPackages"
-          url = "https://maven.pkg.github.com/gavinbunney/clouddriver"
-          credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
+        if (project.version.contains('SNAPSHOT')) {
+          maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/gavinbunney/clouddriver"
+            credentials {
+              username = System.getenv("GITHUB_ACTOR")
+              password = System.getenv("GITHUB_TOKEN")
+            }
           }
-        }
-        maven {
-          name = "bintray"
-          url = "https://dl.bintray.com/gavinbunney/clouddriver"
-          credentials {
-            username = System.getenv("BINTRAY_USER")
-            password = System.getenv("BINTRAY_API_KEY")
+        } else {
+          maven {
+            name = "bintray"
+            url = "https://dl.bintray.com/gavinbunney/clouddriver"
+            credentials {
+              username = System.getenv("BINTRAY_USER")
+              password = System.getenv("BINTRAY_API_KEY")
+            }
           }
         }
       }
